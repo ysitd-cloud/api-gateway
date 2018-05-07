@@ -3,9 +3,11 @@ package bootstrap
 import (
 	"net/http"
 
+	"github.com/facebookgo/inject"
+	"github.com/sirupsen/logrus"
+
 	"code.ysitd.cloud/gateway/pkg/grpc"
 	proxy "code.ysitd.cloud/gateway/pkg/http"
-	"github.com/facebookgo/inject"
 )
 
 var grpcHandler *grpc.Server
@@ -39,4 +41,8 @@ func GetGrpcHandler() http.Handler {
 
 func GetHttpHandler() http.Handler {
 	return httpHandler
+}
+
+func GetMainLogger() logrus.FieldLogger {
+	return logger.WithField("source", "main")
 }
