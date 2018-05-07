@@ -1,4 +1,4 @@
-package routes
+package http
 
 import (
 	"net/http"
@@ -20,7 +20,7 @@ func (m *Mux) ServerHTTP(w http.ResponseWriter, r *http.Request) {
 
 func (m *Mux) initFrontend() {
 	mux := http.NewServeMux()
-	mux.Handle("/account", http.StripPrefix("/account", m.AccountProxy))
+	mux.Handle("/account", m.AccountProxy)
 
 	m.Frontend = mux
 }
