@@ -1,9 +1,9 @@
 package http
 
 import (
-	"net/http"
-	"io/ioutil"
 	"encoding/json"
+	"io/ioutil"
+	"net/http"
 
 	"github.com/julienschmidt/httprouter"
 
@@ -14,8 +14,8 @@ import (
 )
 
 type AccountProxy struct {
-	router http.Handler
-	Logger log.Logger `inject:"account proxy logger"`
+	router  http.Handler
+	Logger  log.Logger         `inject:"account proxy logger"`
 	Backend *client.GrpcClient `inject:""`
 }
 
