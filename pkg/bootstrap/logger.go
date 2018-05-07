@@ -24,6 +24,7 @@ func injectLogger(graph *inject.Graph) {
 	logger := initLogger()
 	graph.Provide(
 		&inject.Object{Value: logger},
+		&inject.Object{Value: logger.WithField("source", "http"), Name: "http logger"},
 		&inject.Object{Value: logger.WithField("source", "grpc"), Name: "grpc logger"},
 		&inject.Object{Value: logger.WithField("source", "account_proxy"), Name: "account proxy logger"},
 	)

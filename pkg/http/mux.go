@@ -2,10 +2,15 @@ package http
 
 import (
 	"net/http"
+
+	"github.com/gorilla/handlers"
+
+	"golang.ysitd.cloud/log"
 )
 
 type Mux struct {
 	Frontend http.Handler
+	Logger   log.Logger `inject:"http logger"`
 
 	AccountProxy *AccountProxy `inject:""`
 }
@@ -20,10 +25,10 @@ func (m *Mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func (m *Mux) initFrontend() {
 	mux := http.NewServeMux()
-	mux.Handle("/account", m.AccountProxy)
-	mux.Handle("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	mux.Handle("/account/", m.AccountProxy)
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "unknown route", http.StatusPaymentRequired)
-	}))
+	})
 
-	m.Frontend = mux
+	m.Frontend = handlers.CombinedLoggingHandler(m.Logger.Writer(), mux)
 }

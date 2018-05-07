@@ -5,13 +5,13 @@
   branch = "master"
   name = "code.ysitd.cloud/api/account"
   packages = ["."]
-  revision = "da48a18ea9f492c562cab4012e9d590b765657da"
+  revision = "76231e7cf1345ee5759b304c4277a60891ea0611"
 
 [[projects]]
   branch = "master"
   name = "code.ysitd.cloud/client/account"
   packages = ["."]
-  revision = "114d9daa1ce80fc033b89b8dc78330351a14ff59"
+  revision = "f029e67878548124a861521edc40bd1b05e4c36d"
 
 [[projects]]
   branch = "master"
@@ -36,6 +36,12 @@
   ]
   revision = "b4deda0973fb4c70b50d226b1af49f3da59f5265"
   version = "v1.1.0"
+
+[[projects]]
+  name = "github.com/gorilla/handlers"
+  packages = ["."]
+  revision = "90663712d74cb411cbef281bc1e08c19d1a76145"
+  version = "v1.3.0"
 
 [[projects]]
   name = "github.com/julienschmidt/httprouter"
@@ -65,10 +71,9 @@
     "http2/hpack",
     "idna",
     "internal/timeseries",
-    "lex/httplex",
     "trace"
   ]
-  revision = "403019bfe6ed9ead9a45c35cfc2dd40e0c3788e2"
+  revision = "d11bb6cd8e3c4e60239c9cb20ef68586d74500d0"
 
 [[projects]]
   branch = "master"
@@ -151,6 +156,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "1dbbd37b6924c7c2cc34c0982a3a2117a2ae3ba73b578431de75b65ab6225eed"
+  inputs-digest = "c999736db94754514b4a782826266011fed9fea2a04de38ce163a72659d5c72b"
   solver-name = "gps-cdcl"
   solver-version = 1
