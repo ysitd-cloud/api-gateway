@@ -31,7 +31,7 @@
 
 [[constraint]]
   branch = "master"
-  name = "code.ysitd.cloud/api/account"
+  name = "code.ysitd.cloud/client/account"
 
 [[constraint]]
   name = "github.com/julienschmidt/httprouter"

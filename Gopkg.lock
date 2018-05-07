@@ -8,6 +8,12 @@
   revision = "da48a18ea9f492c562cab4012e9d590b765657da"
 
 [[projects]]
+  branch = "master"
+  name = "code.ysitd.cloud/client/account"
+  packages = ["."]
+  revision = "114d9daa1ce80fc033b89b8dc78330351a14ff59"
+
+[[projects]]
   name = "github.com/golang/protobuf"
   packages = [
     "proto",
@@ -133,6 +139,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "406a374b29552811ea97d793706664521f0fa5021840109ca8ebe019669b242f"
+  inputs-digest = "7c7cf959f7d74e745dc57a6d203b28e653ec6ef990c692edc2507042bd7c255e"
   solver-name = "gps-cdcl"
   solver-version = 1
