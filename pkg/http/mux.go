@@ -21,6 +21,9 @@ func (m *Mux) ServerHTTP(w http.ResponseWriter, r *http.Request) {
 func (m *Mux) initFrontend() {
 	mux := http.NewServeMux()
 	mux.Handle("/account", m.AccountProxy)
+	mux.Handle("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		http.Error(w, "unknown route", http.StatusPaymentRequired)
+	}))
 
 	m.Frontend = mux
 }

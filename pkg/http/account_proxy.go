@@ -43,7 +43,7 @@ func (p *AccountProxy) validateUserPassword(w http.ResponseWriter, r *http.Reque
 
 	if err != nil {
 		p.Logger.Error(err)
-		http.Error(w, "Error when read body", http.StatusBadRequest)
+		http.Error(w, "Error when read body", http.StatusUnprocessableEntity)
 		return
 	}
 
