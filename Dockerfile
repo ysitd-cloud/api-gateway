@@ -4,7 +4,7 @@ WORKDIR /go/src/code.ysitd.cloud/gateway
 
 COPY . .
 
-RUN dep ensure -vendor-only && \
+RUN dep ensure -v -vendor-only && \
     go install -v
 
 FROM ysitd/binary
