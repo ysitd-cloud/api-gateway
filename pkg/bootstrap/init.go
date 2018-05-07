@@ -10,8 +10,8 @@ import (
 	proxy "code.ysitd.cloud/gateway/pkg/http"
 )
 
-var grpcHandler *grpc.Server
-var httpHandler *proxy.Mux
+var grpcHandler grpc.Server
+var httpHandler proxy.Mux
 
 func init() {
 	var graph inject.Graph
@@ -36,11 +36,11 @@ func init() {
 }
 
 func GetGrpcHandler() http.Handler {
-	return grpcHandler
+	return &grpcHandler
 }
 
 func GetHttpHandler() http.Handler {
-	return httpHandler
+	return &httpHandler
 }
 
 func GetMainLogger() logrus.FieldLogger {
