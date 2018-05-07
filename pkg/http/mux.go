@@ -10,7 +10,7 @@ type Mux struct {
 	AccountProxy *AccountProxy `inject:""`
 }
 
-func (m *Mux) ServerHTTP(w http.ResponseWriter, r *http.Request) {
+func (m *Mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if m.Frontend == nil {
 		m.initFrontend()
 	}
