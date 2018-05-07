@@ -14,6 +14,18 @@
   revision = "114d9daa1ce80fc033b89b8dc78330351a14ff59"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/facebookgo/inject"
+  packages = ["."]
+  revision = "cc1aa653e50f6a9893bcaef89e673e5b24e1e97b"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/facebookgo/structtag"
+  packages = ["."]
+  revision = "217e25fb96916cc60332e399c9aa63f5c422ceed"
+
+[[projects]]
   name = "github.com/golang/protobuf"
   packages = [
     "proto",
@@ -139,6 +151,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "7c7cf959f7d74e745dc57a6d203b28e653ec6ef990c692edc2507042bd7c255e"
+  inputs-digest = "1dbbd37b6924c7c2cc34c0982a3a2117a2ae3ba73b578431de75b65ab6225eed"
   solver-name = "gps-cdcl"
   solver-version = 1
