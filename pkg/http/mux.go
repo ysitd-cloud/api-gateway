@@ -13,6 +13,7 @@ type Mux struct {
 	Logger   log.Logger `inject:"http logger"`
 
 	AccountProxy *AccountProxy `inject:""`
+	TotpProxy    *TotpProxy    `inject:""`
 }
 
 func (m *Mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -26,6 +27,7 @@ func (m *Mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func (m *Mux) initFrontend() {
 	mux := http.NewServeMux()
 	mux.Handle("/account/", m.AccountProxy)
+	mux.Handle("/totp/", m.TotpProxy)
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "unknown route", http.StatusPaymentRequired)
 	})
