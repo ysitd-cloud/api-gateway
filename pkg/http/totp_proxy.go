@@ -28,6 +28,11 @@ func (p *TotpProxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func (p *TotpProxy) initHandler() {
 	router := httprouter.New()
 
+	router.POST("/validate", p.validate)
+	router.POST("/key", p.issueKey)
+	router.PUT("/key", p.recoverKey)
+	router.DELETE("/key", p.removeKey)
+
 	p.handler = http.StripPrefix("/totp", router)
 }
 
