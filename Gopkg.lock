@@ -9,6 +9,12 @@
 
 [[projects]]
   branch = "master"
+  name = "code.ysitd.cloud/api/totp"
+  packages = ["."]
+  revision = "3a08e1867ae5850a309ac45b2b57391b1b002e44"
+
+[[projects]]
+  branch = "master"
   name = "code.ysitd.cloud/client/account"
   packages = ["."]
   revision = "f029e67878548124a861521edc40bd1b05e4c36d"
@@ -156,6 +162,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "c999736db94754514b4a782826266011fed9fea2a04de38ce163a72659d5c72b"
+  inputs-digest = "57eda3b17ca61b609290e11ea09ce0f8245f241c83a6ea77c79355c164f56ee0"
   solver-name = "gps-cdcl"
   solver-version = 1
