@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
@@ -27,8 +28,14 @@ func main() {
 	}()
 
 	httpSrv := &http.Server{
-		Addr:    ":50050",
-		Handler: bootstrap.GetHttpHandler(),
+		Addr: ":50050",
+		Handler: http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			if r.ProtoMajor == 2 && strings.HasPrefix(r.Header.Get("Content-Type"), "application/grpc") {
+				bootstrap.GetGrpcHandler().ServeHTTP(w, r)
+			} else {
+				bootstrap.GetHttpHandler().ServeHTTP(w, r)
+			}
+		}),
 	}
 
 	go func() {
