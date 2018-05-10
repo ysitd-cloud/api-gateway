@@ -10,13 +10,12 @@ import (
 	"golang.ysitd.cloud/log"
 
 	api "code.ysitd.cloud/api/account"
-	client "code.ysitd.cloud/client/account"
 )
 
 type AccountProxy struct {
 	router  http.Handler
-	Logger  log.Logger         `inject:"account proxy logger"`
-	Backend *client.GrpcClient `inject:""`
+	Logger  log.Logger  `inject:"account proxy logger"`
+	Backend *api.Client `inject:""`
 }
 
 func (p *AccountProxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -55,7 +54,7 @@ func (p *AccountProxy) validateUserPassword(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	out, err := p.Backend.Client.ValidateUserPassword(r.Context(), &input)
+	out, err := p.Backend.ValidateUserPassword(r.Context(), &input)
 	if err != nil {
 		p.Logger.Error(err)
 		http.Error(w, "Error when calling backend", http.StatusBadGateway)
@@ -79,7 +78,10 @@ func (p *AccountProxy) validateUserPassword(w http.ResponseWriter, r *http.Reque
 }
 
 func (p *AccountProxy) getUserInfo(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
-	out, err := p.Backend.GetUserInfo(r.Context(), params.ByName("user"))
+
+	out, err := p.Backend.GetUserInfo(r.Context(), &api.GetUserInfoRequest{
+		Username: params.ByName("user"),
+	})
 	if err != nil {
 		p.Logger.Error(err)
 		http.Error(w, "Error when calling backend", http.StatusBadGateway)
@@ -103,7 +105,9 @@ func (p *AccountProxy) getUserInfo(w http.ResponseWriter, r *http.Request, param
 }
 
 func (p *AccountProxy) getTokenInfo(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
-	out, err := p.Backend.GetTokenInfo(r.Context(), params.ByName("token"))
+	out, err := p.Backend.GetTokenInfo(r.Context(), &api.GetTokenInfoRequest{
+		Token: params.ByName("token"),
+	})
 	if err != nil {
 		p.Logger.Error(err)
 		http.Error(w, "Error when calling backend", http.StatusBadGateway)

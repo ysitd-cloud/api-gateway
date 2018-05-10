@@ -15,12 +15,6 @@
 
 [[projects]]
   branch = "master"
-  name = "code.ysitd.cloud/client/account"
-  packages = ["."]
-  revision = "596030480e9e37cd1b6eeaea087c9666b5ddf70d"
-
-[[projects]]
-  branch = "master"
   name = "github.com/facebookgo/inject"
   packages = ["."]
   revision = "cc1aa653e50f6a9893bcaef89e673e5b24e1e97b"
@@ -169,6 +163,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "92e629d7ea2828b01290f10399d14115393a56aba28be119fc57e4807125d818"
+  inputs-digest = "50c94a8adaf81c85a81f7f11fa03f00edab0f8ca66e6ef004111cebb12dfa1ab"
   solver-name = "gps-cdcl"
   solver-version = 1
