@@ -3,11 +3,44 @@ package grpc
 import (
 	"context"
 
+	"bytes"
 	api "code.ysitd.cloud/api/account"
+	"encoding/json"
+	"io/ioutil"
+	"net/http"
 )
 
 func (s *Server) ValidateUserPassword(ctx context.Context, in *api.ValidateUserRequest) (reply *api.ValidateUserReply, err error) {
-	reply, err = s.AccountBackend.ValidateUserPassword(ctx, in)
+	body, err := json.Marshal(in)
+	if err != nil {
+		s.Logger.Error(err)
+		return
+	}
+
+	req, err := http.NewRequest("POST", s.AccountEndpoint+"/validate", bytes.NewReader(body))
+	if err != nil {
+		s.Logger.Error(err)
+		return
+	}
+
+	resp, err := s.Client.Do(req)
+	if err != nil {
+		s.Logger.Error(err)
+		return
+	}
+
+	defer resp.Body.Close()
+
+	content, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		s.Logger.Error(err)
+		return
+	}
+
+	reply = new(api.ValidateUserReply)
+
+	err = json.Unmarshal(content, reply)
+
 	if err != nil {
 		s.Logger.Error(err)
 	}
@@ -15,7 +48,26 @@ func (s *Server) ValidateUserPassword(ctx context.Context, in *api.ValidateUserR
 }
 
 func (s *Server) GetUserInfo(ctx context.Context, in *api.GetUserInfoRequest) (reply *api.GetUserInfoReply, err error) {
-	reply, err = s.AccountBackend.GetUserInfo(ctx, in)
+	req, err := http.NewRequest("GET", s.AccountEndpoint+"/user/"+in.Username, nil)
+
+	resp, err := s.Client.Do(req)
+	if err != nil {
+		s.Logger.Error(err)
+		return
+	}
+
+	defer resp.Body.Close()
+
+	content, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		s.Logger.Error(err)
+		return
+	}
+
+	reply = new(api.GetUserInfoReply)
+
+	err = json.Unmarshal(content, reply)
+
 	if err != nil {
 		s.Logger.Error(err)
 	}
@@ -23,7 +75,26 @@ func (s *Server) GetUserInfo(ctx context.Context, in *api.GetUserInfoRequest) (r
 }
 
 func (s *Server) GetTokenInfo(ctx context.Context, in *api.GetTokenInfoRequest) (reply *api.GetTokenInfoReply, err error) {
-	reply, err = s.AccountBackend.GetTokenInfo(ctx, in)
+	req, err := http.NewRequest("GET", s.AccountEndpoint+"/token/"+in.Token, nil)
+
+	resp, err := s.Client.Do(req)
+	if err != nil {
+		s.Logger.Error(err)
+		return
+	}
+
+	defer resp.Body.Close()
+
+	content, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		s.Logger.Error(err)
+		return
+	}
+
+	reply = new(api.GetTokenInfoReply)
+
+	err = json.Unmarshal(content, reply)
+
 	if err != nil {
 		s.Logger.Error(err)
 	}

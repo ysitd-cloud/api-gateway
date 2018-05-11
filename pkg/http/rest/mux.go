@@ -6,14 +6,16 @@ import (
 	"github.com/gorilla/handlers"
 
 	"golang.ysitd.cloud/log"
+	"net/http/httputil"
+	"net/url"
 )
 
 type Mux struct {
 	Frontend http.Handler
 	Logger   log.Logger `inject:"http logger"`
 
-	AccountProxy *AccountProxy `inject:""`
-	TotpProxy    *TotpProxy    `inject:""`
+	TotpProxy       *TotpProxy `inject:""`
+	AccountEndpoint string     `inject:"account endpoint"`
 }
 
 func (m *Mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -26,7 +28,12 @@ func (m *Mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func (m *Mux) initFrontend() {
 	mux := http.NewServeMux()
-	mux.Handle("/account/", m.AccountProxy)
+
+	mux.Handle("/account/", http.StripPrefix("/account", httputil.NewSingleHostReverseProxy(&url.URL{
+		Scheme: "http",
+		Host:   m.AccountEndpoint,
+		Path:   "/",
+	})))
 	mux.Handle("/totp/", m.TotpProxy)
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "unknown route", http.StatusPaymentRequired)

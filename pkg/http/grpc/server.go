@@ -18,8 +18,10 @@ type Server struct {
 	Server *grpc.Server `inject:""`
 	Logger log.Logger   `inject:"grpc logger"`
 
-	AccountBackend *account.Client `inject:""`
-	TotpBackend    *totp.Client    `inject:""`
+	Client *http.Client `inject:""`
+
+	AccountEndpoint string       `inject:"account endpoint"`
+	TotpBackend     *totp.Client `inject:""`
 }
 
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
