@@ -1,16 +1,16 @@
 package rest
 
 import (
+	"encoding/json"
+	"io/ioutil"
 	"net/http"
+	"time"
+
+	"github.com/julienschmidt/httprouter"
 
 	"golang.ysitd.cloud/log"
 
 	api "code.ysitd.cloud/api/totp"
-	"encoding/json"
-	"github.com/golang/protobuf/ptypes/timestamp"
-	"github.com/julienschmidt/httprouter"
-	"io/ioutil"
-	"time"
 )
 
 type TotpProxy struct {
@@ -106,10 +106,7 @@ func (p *TotpProxy) validate(w http.ResponseWriter, r *http.Request, _ httproute
 		Issuer:   input.Issuer,
 		Username: input.Username,
 		Passcode: input.Passcode,
-		Time: &timestamp.Timestamp{
-			Seconds: t.Unix(),
-			Nanos:   int32(t.Nanosecond()),
-		},
+		Time:     &t,
 	})
 
 	if err != nil {
