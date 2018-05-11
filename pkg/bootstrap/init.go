@@ -6,20 +6,17 @@ import (
 	"github.com/facebookgo/inject"
 	"github.com/sirupsen/logrus"
 
-	"app.ysitd/gateway/pkg/grpc"
 	proxy "app.ysitd/gateway/pkg/http"
 )
 
-var grpcHandler grpc.Server
-var httpHandler proxy.Mux
+var handler proxy.Handler
 
 func init() {
 	var graph inject.Graph
 	graph.Logger = initLogger()
 
 	graph.Provide(
-		&inject.Object{Value: &grpcHandler},
-		&inject.Object{Value: &httpHandler},
+		&inject.Object{Value: &handler},
 	)
 
 	for _, fn := range []func(*inject.Graph){
@@ -35,12 +32,8 @@ func init() {
 	}
 }
 
-func GetGrpcHandler() http.Handler {
-	return &grpcHandler
-}
-
-func GetHttpHandler() http.Handler {
-	return &httpHandler
+func GetHandler() http.Handler {
+	return &handler
 }
 
 func GetMainLogger() logrus.FieldLogger {
