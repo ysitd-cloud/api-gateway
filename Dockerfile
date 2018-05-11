@@ -1,6 +1,6 @@
 FROM ysitd/dep AS builder
 
-WORKDIR /go/src/code.ysitd.cloud/gateway
+WORKDIR /go/src/app.ysitd/gateway
 
 COPY . .
 

@@ -6,8 +6,8 @@ import (
 	"github.com/facebookgo/inject"
 	"github.com/sirupsen/logrus"
 
-	"code.ysitd.cloud/gateway/pkg/grpc"
-	proxy "code.ysitd.cloud/gateway/pkg/http"
+	"app.ysitd/gateway/pkg/grpc"
+	proxy "app.ysitd/gateway/pkg/http"
 )
 
 var grpcHandler grpc.Server

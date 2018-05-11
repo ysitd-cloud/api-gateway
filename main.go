@@ -9,7 +9,7 @@ import (
 	"syscall"
 	"time"
 
-	"code.ysitd.cloud/gateway/pkg/bootstrap"
+	"app.ysitd/gateway/pkg/bootstrap"
 )
 
 func main() {
