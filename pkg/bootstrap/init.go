@@ -11,6 +11,8 @@ import (
 
 var handler proxy.Handler
 
+type injectFunc func(*inject.Graph) error
+
 func init() {
 	var graph inject.Graph
 	graph.Logger = initLogger()
@@ -19,12 +21,14 @@ func init() {
 		&inject.Object{Value: &handler},
 	)
 
-	for _, fn := range []func(*inject.Graph){
+	for _, fn := range []injectFunc{
 		injectLogger,
 		injectGrpc,
 		injectBackend,
 	} {
-		fn(&graph)
+		if err := fn(&graph); err != nil {
+			panic(err)
+		}
 	}
 
 	if err := graph.Populate(); err != nil {

@@ -20,9 +20,9 @@ func initLogger() *logrus.Logger {
 	return logger
 }
 
-func injectLogger(graph *inject.Graph) {
+func injectLogger(graph *inject.Graph) error {
 	logger := initLogger()
-	graph.Provide(
+	return graph.Provide(
 		&inject.Object{Value: logger},
 		&inject.Object{Value: logger.WithField("source", "http"), Name: "http logger"},
 		&inject.Object{Value: logger.WithField("source", "grpc"), Name: "grpc logger"},
