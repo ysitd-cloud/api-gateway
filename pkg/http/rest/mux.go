@@ -29,11 +29,12 @@ func (m *Mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func (m *Mux) initFrontend() {
 	mux := http.NewServeMux()
 
-	mux.Handle("/account/", http.StripPrefix("/account", httputil.NewSingleHostReverseProxy(&url.URL{
+	proxy := httputil.NewSingleHostReverseProxy(&url.URL{
 		Scheme: "http",
 		Host:   m.AccountEndpoint,
 		Path:   "/",
-	})))
+	})
+	mux.Handle("/account/", http.StripPrefix("/account", proxy))
 	mux.Handle("/totp/", m.TotpProxy)
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "unknown route", http.StatusPaymentRequired)
