@@ -5,7 +5,7 @@
   branch = "master"
   name = "code.ysitd.cloud/api/account"
   packages = ["."]
-  revision = "49ec018915324f3bcbe376a4e76db9867d524636"
+  revision = "cd11020463f6a4ea193e2146c4f82048d1a5b8c1"
 
 [[projects]]
   name = "code.ysitd.cloud/api/totp"
@@ -71,7 +71,7 @@
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
-  revision = "2d027ae1dddd4694d54f7a8b6cbe78dca8720226"
+  revision = "1a580b3eff7814fc9b40602fd35256c63b50f491"
 
 [[projects]]
   branch = "master"
@@ -85,7 +85,7 @@
     "internal/timeseries",
     "trace"
   ]
-  revision = "f73e4c9ed3b7ebdd5f699a16a880c2b1994e50dd"
+  revision = "57065200b4b034a1c8ad54ff77069408c2218ae6"
 
 [[projects]]
   branch = "master"
@@ -94,7 +94,7 @@
     "unix",
     "windows"
   ]
-  revision = "9950ad118b73f9207b991f01920a3509c68f7f2b"
+  revision = "7c87d13f8e835d2fb3a70a2912c811ed0c1d241b"
 
 [[projects]]
   name = "golang.org/x/text"
@@ -133,7 +133,7 @@
   branch = "master"
   name = "google.golang.org/genproto"
   packages = ["googleapis/rpc/status"]
-  revision = "86e600f69ee4704c6efbf6a2a40a5c10700e76c2"
+  revision = "11a468237815f3a3ddf9f7c6e8b6b3b382a24d15"
 
 [[projects]]
   name = "google.golang.org/grpc"
